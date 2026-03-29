@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>E-Commerce Product Info</title>
+<h4>Name-Mehak Gupta<br>
+Registration No-24BDS0210</h4>
+    <style>
+        div {
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 300px;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+
+        span {
+            color: red;
+            font-weight: bold;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div>
+    Agricultural Equipment Price: 
+    <span>₹50,000</span>
+</div>
+
+</body>
+</html>
+
+
