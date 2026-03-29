@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h4>Name-Mehak Gupta<br>
+        Registration Number-24BDS0210</h4>
+    <meta charset="UTF-8">
+    <title>Job Skills Validation</title>
+
+    <style>
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        fieldset {
+            border: 2px solid #007bff;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        legend {
+            font-weight: bold;
+            color: #007bff;
+            padding: 0 10px;
+        }
+    </style>
+
+    <script>
+        function validateSkills() {
+            var skillsCBs = document.getElementsByName("skills");
+            var selectedCount = 0;
+            var selectedSkills = "";
+            var message = "";
+
+            for (let i = 0; i < skillsCBs.length; i++) {
+                if (skillsCBs[i].checked) {
+                    selectedCount++;
+
+                    if (selectedSkills !== "") {
+                        selectedSkills += ", ";
+                    }
+                    selectedSkills += skillsCBs[i].value;
+                }
+            }
+
+            if (selectedCount < 3) {
+                message = "<span class='error'>Please select at least 3 skills. You selected: " + selectedCount + "</span>";
+            } else {
+                message = "<span class='success'>✓ Valid! Selected skills: " + selectedSkills + "</span>";
+            }
+
+            document.getElementById("result").innerHTML = message;
+        }
+    </script>
+</head>
+
+<body>
+    <h3>Job Application - Skills</h3>
+
+    <form id="skillsForm">
+        <fieldset>
+            <legend>Select Your Skills (Minimum 3)</legend>
+
+            <input type="checkbox" name="skills" value="JavaScript"> JavaScript<br>
+            <input type="checkbox" name="skills" value="HTML/CSS"> HTML/CSS<br>
+            <input type="checkbox" name="skills" value="Python"> Python<br>
+            <input type="checkbox" name="skills" value="Java"> Java<br>
+            <input type="checkbox" name="skills" value="SQL"> SQL<br>
+            <input type="checkbox" name="skills" value="React"> React<br>
+            <input type="checkbox" name="skills" value="Node.js"> Node.js<br>
+
+        </fieldset>
+
+        <input type="button" value="Validate Skills" onclick="validateSkills()">
+    </form>
+
+    <p id="result"></p>
+</body>
+</html>

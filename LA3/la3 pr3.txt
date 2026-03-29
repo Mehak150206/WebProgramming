@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h4>Name- Mehak Gupta<br>
+        Registration Number-24BDS0210</h4>
+    <meta charset="UTF-8">
+    <title>Email Generator</title>
+</head>
+<body>
+
+    <h2>Email Address Generator</h2>
+
+    <form>
+        First Name: <input type="text" name="fname"><br><br>
+        Last Name: <input type="text" name="lname"><br><br>
+
+        <button type="button" onclick="generateEmail(this.form)">Generate Email</button>
+        <button type="reset">Reset</button>
+    </form>
+
+    <h3 id="result"></h3>
+
+    <script>
+        function generateEmail(form) {
+            // Access form elements
+            var firstName = form.elements["fname"].value;
+            var lastName = form.elements["lname"].value;
+
+            // Generate email using string concatenation
+            var email = firstName + "." + lastName + "@park.edu";
+
+            // Display result using innerHTML
+            document.getElementById("result").innerHTML = email;
+
+            // Reset the form
+            form.reset();
+
+            // Set focus back to first name field
+            form.elements["fname"].focus();
+        }
+    </script>
+
+</body>
+</html>
+

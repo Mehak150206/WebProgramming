@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h4>Name-Mehak Gupta<br>
+    Registration Number-24BDS0210</h4>
+    <meta charset="UTF-8">
+    <title>Animal Stacking with Z-Index</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .images {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            margin: 30px auto;
+            border: 3px solid #333;
+            background-color: white;
+        }
+
+        .animal {
+            position: absolute;
+            width: 300px;
+            height: 200px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            border: 2px solid #333;
+        }
+
+        .animal:hover {
+            transform: scale(1.05);
+        }
+
+        .tiger {
+            left: 0;
+            top: 0;
+            z-index: 0;
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b6b 100%);
+        }
+
+        .lemur {
+            left: 20%;
+            top: 15%;
+            z-index: 1;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .red-panda {
+            right: 0;
+            bottom: 0;
+            z-index: 2;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .tiger::after {
+            content: "🐯 Tiger";
+            font-size: 40px;
+            line-height: 200px;
+        }
+
+        .lemur::after {
+            content: "🐵 Lemur";
+            font-size: 40px;
+            line-height: 200px;
+        }
+
+        .red-panda::after {
+            content: "🦊 Red Panda";
+            font-size: 40px;
+            line-height: 200px;
+        }
+
+        .info {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .z-index-display {
+            font-family: monospace;
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+    </style>
+
+    <script>
+        var topIndex = 2;
+
+        function moveToTop(picture) {
+            picture.style.zIndex = ++topIndex;
+            updateZIndexDisplay();
+
+            console.log("Moved to front: " + picture.className);
+            console.log("New topIndex: " + topIndex);
+        }
+
+        function updateZIndexDisplay() {
+            var tiger = document.querySelector(".tiger");
+            var lemur = document.querySelector(".lemur");
+            var panda = document.querySelector(".red-panda");
+
+            var html = "<strong>Current Z-Index Values:</strong><br>";
+            html += "Tiger: <span class='z-index-display'>" + tiger.style.zIndex + "</span> | ";
+            html += "Lemur: <span class='z-index-display'>" + lemur.style.zIndex + "</span> | ";
+            html += "Red Panda: <span class='z-index-display'>" + panda.style.zIndex + "</span>";
+
+            document.getElementById("zIndexInfo").innerHTML = html;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>🦁 Furry Forest Friends</h1>
+    <p>Click on any animal to bring it to the front!</p>
+
+    <div class="images">
+
+        <div class="animal tiger"
+             onclick="moveToTop(this)"
+             title="Click to bring to front">
+        </div>
+
+        <div class="animal lemur"
+             onclick="moveToTop(this)"
+             title="Click to bring to front">
+        </div>
+
+        <div class="animal red-panda"
+             onclick="moveToTop(this)"
+             title="Click to bring to front">
+        </div>
+
+    </div>
+
+    <div class="info" id="zIndexInfo">
+        <strong>Current Z-Index Values:</strong><br>
+        Tiger: <span class="z-index-display">0</span> |
+        Lemur: <span class="z-index-display">1</span> |
+        Red Panda: <span class="z-index-display">2</span>
+    </div>
+
+    <div class="info" style="margin-top: 10px; font-size: 14px;">
+        <strong>How it works:</strong><br>
+        • <code>position: absolute</code> is required for z-index<br>
+        • Global variable <code>topIndex</code> tracks highest z-index<br>
+        • <code>++topIndex</code> (prefix increment) increases then assigns<br>
+        • Higher z-index = closer to viewer (front)
+    </div>
+</body>
+</html>

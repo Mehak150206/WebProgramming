@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h4>Name-Mehak Gupta<br>
+        Registration Number-24BDS0210</h4>
+    <meta charset="UTF-8">
+    <title>Radio Button Example</title>
+</head>
+<body>
+
+    <h2>Select a Color</h2>
+
+    <input type="radio" name="color" value="Red"> Red<br>
+    <input type="radio" name="color" value="Green"> Green<br>
+    <input type="radio" name="color" value="Blue"> Blue<br><br>
+
+    <button onclick="showColor()">Show Selected Color</button>
+
+    <p id="result"></p>
+
+    <script>
+        function showColor() {
+            // Get all radio buttons by name
+            var colors = document.getElementsByName("color");
+            var selected = "";
+
+            // Loop through radio buttons
+            for (var i = 0; i < colors.length; i++) {
+                if (colors[i].checked) {
+                    selected = colors[i].value;
+                    break;
+                }
+            }
+
+            // Display result
+            if (selected !== "") {
+                document.getElementById("result").innerHTML =
+                    "Selected Color: " + selected;
+            } else {
+                document.getElementById("result").innerHTML =
+                    "Please select a color";
+            }
+        }
+    </script>
+
+</body>
+</html>
+

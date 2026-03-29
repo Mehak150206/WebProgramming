@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h4>Name-Mehak Gupta<br>
+    Registration Number-24BDS0210</h4>
+    <meta charset="UTF-8">
+    <title>Simple Calculator</title>
+</head>
+<body>
+
+    <h2>Calculator</h2>
+
+    Number 1: <input type="number" id="num1" step="any"><br><br>
+    Number 2: <input type="number" id="num2" step="any"><br><br>
+
+    <button onclick="calculate('add')">Add</button>
+    <button onclick="calculate('sub')">Subtract</button>
+    <button onclick="calculate('mul')">Multiply</button>
+    <button onclick="calculate('div')">Divide</button>
+
+    <p id="result"></p>
+
+    <script>
+        function calculate(operation) {
+            // Get values and convert to float
+            var num1 = parseFloat(document.getElementById("num1").value);
+            var num2 = parseFloat(document.getElementById("num2").value);
+            var result;
+
+            // Perform operation using switch
+            switch(operation) {
+                case 'add':
+                    result = num1 + num2;
+                    break;
+
+                case 'sub':
+                    result = num1 - num2;
+                    break;
+
+                case 'mul':
+                    result = num1 * num2;
+                    break;
+
+                case 'div':
+                    if (num2 === 0) {
+                        document.getElementById("result").innerHTML =
+                            "Error: Division by zero is not allowed";
+                        return;
+                    }
+                    result = num1 / num2;
+                    break;
+
+                default:
+                    result = "Invalid Operation";
+            }
+
+            // Display result
+            document.getElementById("result").innerHTML =
+                "Result: " + result;
+        }
+    </script>
+
+</body>
+</html>

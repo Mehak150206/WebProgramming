@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h4>Name-Mehak Gupta<br>
+        Registration Number-24BDS0210</h4>
+    <meta charset="UTF-8">
+    <title>Print 1 to N</title>
+</head>
+<body>
+
+    <h2>Print Numbers from 1 to N</h2>
+
+    Enter N: <input type="text" id="num"><br><br>
+
+    <button onclick="printNumbers()">Print</button>
+
+    <p id="result"></p>
+
+    <script>
+        function printNumbers() {
+            // Get user input
+            var n = document.getElementById("num").value;
+
+            // Counter initialization
+            var i = 1;
+            var output = "";
+
+            // While loop
+            while (i <= n) {
+                output += i + " ";
+                i++; // increment
+            }
+
+            // Display result
+            document.getElementById("result").innerHTML = output;
+        }
+    </script>
+
+</body>
+</html>

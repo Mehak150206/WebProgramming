@@ -1,0 +1,48 @@
+HTML file:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h4>Name-Mehak Gupta<br>
+    Registration Number-24BDS0210</h4>
+    <meta charset="UTF-8">
+    <title>Simple Interest Calculator</title>
+
+    <!-- Linking external JS file -->
+    <script src="script.js"></script>
+</head>
+<body>
+
+    <h2>Simple Interest Calculator</h2>
+
+    Principal: <input type="text" id="principal"><br><br>
+    Rate (%): <input type="text" id="rate"><br><br>
+    Time (years): <input type="text" id="time"><br><br>
+
+    <button onclick="calculateSI()">Calculate</button>
+
+    <p id="result"></p>
+
+</body>
+</html>
+Js file:
+// Function to calculate Simple Interest
+function calculateSimpleInterest(p, r, t) {
+    return (p * r * t) / 100;
+}
+
+// Function called on button click
+function calculateSI() {
+    // Get input values
+    var p = parseFloat(document.getElementById("principal").value);
+    var r = parseFloat(document.getElementById("rate").value);
+    var t = parseFloat(document.getElementById("time").value);
+
+    // Call external function
+    var si = calculateSimpleInterest(p, r, t);
+
+    // Display result
+    document.getElementById("result").innerHTML =
+        "Simple Interest: " + si;
+}
+
+

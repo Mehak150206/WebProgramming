@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<h4>Name-Mehak Gupta<br>
+Registration Number-24BDS0210</h4>
+    <meta charset="UTF-8">
+    <title>Rectangle Area Calculator</title>
+</head>
+<body>
+
+    <h2>Area of Rectangle</h2>
+
+    Length: <input type="text" id="lengthValue"><br><br>
+    Breadth: <input type="text" id="breadthValue"><br><br>
+
+    <button onclick="calculateArea()">Calculate Area</button>
+
+    <p id="result"></p>
+
+    <script>
+        function calculateArea() {
+            // Get input values
+            var lengthValue = document.getElementById("lengthValue").value;
+            var breadthValue = document.getElementById("breadthValue").value;
+
+            // Calculate area (loose typing handles conversion)
+            var areaResult = lengthValue * breadthValue;
+
+            // Display result
+            document.getElementById("result").innerHTML =
+                "Area of Rectangle: " + areaResult;
+        }
+    </script>
+
+</body>
+</html>
+
+
+
+
+

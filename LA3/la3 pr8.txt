@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h4>Name-Mehak Gupta<br>
+    Registration Number-24BDS0210</h4>
+    <meta charset="UTF-8">
+    <title>Multiplication Table</title>
+</head>
+<body>
+
+    <h2>Multiplication Table</h2>
+
+    Enter Number: <input type="text" id="num"><br><br>
+
+    <button onclick="printTable()">Generate Table</button>
+
+    <p id="result"></p>
+
+    <script>
+        function printTable() {
+            // Get input
+            var n = document.getElementById("num").value;
+
+            var i = 1;
+            var output = "";
+
+            // Do-while loop
+            do {
+                output += n + " x " + i + " = " + (n * i) + "<br>";
+                i++;
+            } while (i <= 10);
+
+            // Display result
+            document.getElementById("result").innerHTML = output;
+        }
+    </script>
+
+</body>
+</html>
+

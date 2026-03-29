@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h4>Name-Mehak Gupta<br>
+        Registration Number-24BDS0210</h4>
+    <meta charset="UTF-8">
+    <title>Product Order Calculator</title>
+
+    <style>
+        fieldset {
+            border: 2px solid #28a745;
+            margin: 15px 0;
+            padding: 15px;
+        }
+        legend {
+            font-weight: bold;
+            color: #28a745;
+            padding: 0 10px;
+            font-size: 16px;
+        }
+        .category1 { border-color: #007bff; }
+        .category1 legend { color: #007bff; }
+
+        .category2 { border-color: #dc3545; }
+        .category2 legend { color: #dc3545; }
+
+        .total {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+    </style>
+
+    <script>
+        function calculateTotal() {
+            var checkedItems = document.querySelectorAll('input[name="product"]:checked');
+
+            var total = 0;
+            var itemList = "";
+
+            for (let item of checkedItems) {
+                var price = parseFloat(item.getAttribute("data-price"));
+                total += price;
+
+                if (itemList !== "") {
+                    itemList += "<br>";
+                }
+                itemList += "• " + item.value + " - $" + price.toFixed(2);
+            }
+
+            var resultHTML = "<strong>Selected Items:</strong><br>" + itemList;
+            resultHTML += "<div class='total'>Total: $" + total.toFixed(2) + "</div>";
+
+            document.getElementById("orderSummary").innerHTML = resultHTML;
+        }
+    </script>
+</head>
+
+<body>
+    <h3> Product Order Form</h3>
+
+    <form id="orderForm">
+
+        <fieldset class="category1">
+            <legend>Electronics</legend>
+
+            <input type="checkbox" name="product" value="Wireless Mouse" data-price="25.99">
+            Wireless Mouse - $25.99<br>
+
+            <input type="checkbox" name="product" value="USB Keyboard" data-price="45.50">
+            USB Keyboard - $45.50<br>
+
+            <input type="checkbox" name="product" value="Webcam HD" data-price="79.99">
+            Webcam HD - $79.99
+        </fieldset>
+
+        <fieldset class="category2">
+            <legend>Accessories</legend>
+
+            <input type="checkbox" name="product" value="Mouse Pad" data-price="12.99">
+            Mouse Pad - $12.99<br>
+
+            <input type="checkbox" name="product" value="USB Cable" data-price="8.50">
+            USB Cable - $8.50<br>
+
+            <input type="checkbox" name="product" value="Laptop Stand" data-price="35.00">
+            Laptop Stand - $35.00
+        </fieldset>
+
+        <input type="button" value="Calculate Total" onclick="calculateTotal()">
+    </form>
+
+    <div id="orderSummary"></div>
+</body>
+</html>

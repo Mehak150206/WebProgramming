@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h4>Name-Mehak Gupta<br>
+    Registration Number-24BDS0210</h4>
+    <meta charset="UTF-8">
+    <title>Background Color Changer</title>
+</head>
+<body>
+
+    <h2>Click a button to change background color</h2>
+
+    <button type="button" onclick="changeColor('red')">Red</button>
+    <button type="button" onclick="changeColor('green')">Green</button>
+    <button type="button" onclick="changeColor('blue')">Blue</button>
+
+    <script>
+        // Function with parameter
+        function changeColor(color) {
+            // Change background color using DOM
+            document.body.style.backgroundColor = color;
+        }
+    </script>
+
+</body>
+</html>

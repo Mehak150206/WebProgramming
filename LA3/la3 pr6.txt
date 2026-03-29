@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h4>Name-Mehak Gupta<br>
+    Registration Number-24BDS0210</h4>
+    <meta charset="UTF-8">
+    <title>Student Information System</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f2f2f2;
+        }
+        .container {
+            width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        input, select {
+            width: 100%;
+            margin: 5px 0;
+            padding: 8px;
+        }
+        button {
+            margin: 5px;
+            padding: 8px 12px;
+        }
+        table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Student Information System</h2>
+
+    <form id="studentForm">
+        Name: <input type="text" name="name"><br>
+        Age: <input type="number" name="age"><br>
+        Course:
+        <select name="course">
+            <option value="BCA">BCA</option>
+            <option value="BSc">BSc</option>
+            <option value="BCom">BCom</option>
+        </select><br>
+
+        <button type="button" onclick="addStudent(this.form)">Add Student</button>
+        <button type="button" onclick="resetForm(this.form)">Reset</button>
+    </form>
+
+    <table id="studentTable">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Course</th>
+        </tr>
+    </table>
+</div>
+
+<script>
+    // Global array to store students
+    var students = [];
+
+    // Constructor function (Object)
+    function Student(name, age, course) {
+        this.name = name;
+        this.age = age;
+        this.course = course;
+
+        // Object method
+        this.display = function() {
+            return "<td>" + this.name + "</td>" +
+                   "<td>" + this.age + "</td>" +
+                   "<td>" + this.course + "</td>";
+        };
+    }
+
+    // Function to add student
+    function addStudent(form) {
+        // Get values from form
+        var name = form.elements["name"].value;
+        var age = form.elements["age"].value;
+        var course = form.elements["course"].value;
+
+        // Create object and store in array
+        var studentObj = new Student(name, age, course);
+        students.push(studentObj);
+
+        // Update table dynamically
+        displayStudents();
+
+        // Reset form and focus
+        form.reset();
+        form.elements["name"].focus();
+    }
+
+    // Function to display students
+    function displayStudents() {
+        var table = document.getElementById("studentTable");
+
+        // Reset table (keep header)
+        table.innerHTML = "<tr><th>Name</th><th>Age</th><th>Course</th></tr>";
+
+        // Loop through array
+        for (var i = 0; i < students.length; i++) {
+            var row = "<tr>" + students[i].display() + "</tr>";
+            table.innerHTML += row;
+        }
+    }
+
+    // Reset function
+    function resetForm(form) {
+        form.reset();
+        form.elements["name"].focus();
+    }
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+

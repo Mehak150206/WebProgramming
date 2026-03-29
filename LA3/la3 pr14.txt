@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h4>Name-Mehak Gupta<br>
+        Registration Number-24BDS0210</h4>
+    <meta charset="UTF-8">
+    <title>Text Styling with className</title>
+
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            font-family: Georgia, serif;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .small-cap {
+            font-variant: small-caps;
+        }
+
+        .underline {
+            text-decoration: underline;
+        }
+
+        .highlight {
+            background-color: yellow;
+        }
+
+        #message {
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #333;
+            font-size: 18px;
+            line-height: 1.6;
+            transition: all 0.3s;
+        }
+
+        .style-btn {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border: 2px solid #333;
+            background: white;
+        }
+
+        .style-btn:hover {
+            background: #f0f0f0;
+        }
+
+        fieldset {
+            margin: 15px 0;
+            padding: 15px;
+        }
+
+        legend {
+            font-weight: bold;
+            padding: 0 10px;
+        }
+    </style>
+
+    <script>
+        function applyStyle(styleClass) {
+            var message = document.getElementById("message");
+            message.className = styleClass;
+
+            document.getElementById("currentClass").innerHTML =
+                "Current class: <code>" + styleClass + "</code>";
+        }
+
+        function combineStyles() {
+            var message = document.getElementById("message");
+            message.className = "italic bold small-cap";
+
+            document.getElementById("currentClass").innerHTML =
+                "Current classes: <code>italic bold small-cap</code>";
+        }
+
+        function clearStyles() {
+            document.getElementById("message").className = "";
+            document.getElementById("currentClass").innerHTML =
+                "Current class: (none)";
+        }
+
+        function toggleHighlight() {
+            var message = document.getElementById("message");
+            var currentClasses = message.className;
+
+            if (currentClasses.includes("highlight")) {
+                message.className = currentClasses.replace(" highlight", "");
+            } else {
+                message.className = currentClasses + " highlight";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h3>Text Styling Application</h3>
+
+        <fieldset>
+            <legend>Apply Single Style</legend>
+            <button class="style-btn" onclick="applyStyle('italic')">Italic</button>
+            <button class="style-btn" onclick="applyStyle('bold')">Bold</button>
+            <button class="style-btn" onclick="applyStyle('small-cap')">Small Caps</button>
+            <button class="style-btn" onclick="applyStyle('underline')">Underline</button>
+        </fieldset>
+
+        <fieldset>
+            <legend>Combined Styles</legend>
+            <button class="style-btn" onclick="combineStyles()">Italic + Bold + Small Caps</button>
+            <button class="style-btn" onclick="toggleHighlight()">Toggle Highlight</button>
+            <button class="style-btn" onclick="clearStyles()">Clear All</button>
+        </fieldset>
+
+        <div id="message">
+            "The Analytical Engine has no pretensions whatever to originate anything.
+            It can do whatever we know how to order it to perform."
+            <br><br>
+            — Ada Lovelace, The World's First Computer Programmer
+        </div>
+
+        <p id="currentClass">Current class: (none)</p>
+    </div>
+</body>
+</html>
+

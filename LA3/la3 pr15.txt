@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h4 style="text-align: center;">Name-Mehak Gupta<br>
+        Registration Number-24BDS0210</h4>
+    <meta charset="UTF-8">
+    <title>Dynamic Font Customizer</title>
+
+    <style>
+        .container {
+            max-width: 700px;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+        }
+
+        #previewBox {
+            padding: 30px;
+            margin: 20px 0;
+            border: 3px solid #333;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        fieldset {
+            margin: 15px 0;
+            padding: 15px;
+            border: 2px solid #667eea;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #667eea;
+            padding: 0 10px;
+        }
+
+        .control-group {
+            margin: 10px 0;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            font-weight: 500;
+        }
+
+        input, select {
+            padding: 5px;
+            width: 200px;
+        }
+    </style>
+
+    <script>
+        function changeFontSize() {
+            var size = document.getElementById("fontSize").value;
+            var preview = document.getElementById("previewBox");
+
+            preview.style.fontSize = size + "px";
+            document.getElementById("sizeDisplay").textContent = size + "px";
+        }
+
+        function changeColor() {
+            var color = document.getElementById("textColor").value;
+            document.getElementById("previewBox").style.color = color;
+        }
+
+        function changeBackground() {
+            var bgColor = document.getElementById("bgColor").value;
+            document.getElementById("previewBox").style.backgroundColor = bgColor;
+        }
+
+        function changeFontFamily() {
+            var font = document.getElementById("fontFamily").value;
+            document.getElementById("previewBox").style.fontFamily = font;
+        }
+
+        function changeLineHeight() {
+            var height = document.getElementById("lineHeight").value;
+            document.getElementById("previewBox").style.lineHeight = height;
+            document.getElementById("lineHeightDisplay").textContent = height;
+        }
+
+        function resetStyles() {
+            var preview = document.getElementById("previewBox");
+
+            preview.style.fontSize = "";
+            preview.style.color = "";
+            preview.style.backgroundColor = "";
+            preview.style.fontFamily = "";
+            preview.style.lineHeight = "";
+
+            document.getElementById("fontSize").value = "16";
+            document.getElementById("sizeDisplay").textContent = "16px";
+            document.getElementById("lineHeight").value = "1.5";
+            document.getElementById("lineHeightDisplay").textContent = "1.5";
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h3>🎨 Dynamic Font Customizer</h3>
+
+        <form id="customizerForm">
+
+            <fieldset>
+                <legend>Font Size</legend>
+                <div class="control-group">
+                    <label>Size: <span id="sizeDisplay">16px</span></label>
+                    <input type="range" id="fontSize" min="10" max="72" value="16"
+                           oninput="changeFontSize()">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Colors</legend>
+                <div class="control-group">
+                    <label>Text Color:</label>
+                    <input type="color" id="textColor" value="#000000"
+                           onchange="changeColor()">
+                </div>
+                <div class="control-group">
+                    <label>Background:</label>
+                    <input type="color" id="bgColor" value="#ffffff"
+                           onchange="changeBackground()">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Typography</legend>
+                <div class="control-group">
+                    <label>Font Family:</label>
+                    <select id="fontFamily" onchange="changeFontFamily()">
+                        <option value="Arial, sans-serif">Arial</option>
+                        <option value="Georgia, serif">Georgia</option>
+                        <option value="'Courier New', monospace">Courier New</option>
+                        <option value="'Times New Roman', serif">Times New Roman</option>
+                        <option value="Verdana, sans-serif">Verdana</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Line Height: <span id="lineHeightDisplay">1.5</span></label>
+                    <input type="range" id="lineHeight" min="1" max="3" step="0.1" value="1.5"
+                           oninput="changeLineHeight()">
+                </div>
+            </fieldset>
+
+            <button type="button" onclick="resetStyles()">Reset All Styles</button>
+        </form>
+
+        <div id="previewBox">
+            <h4>Preview Text</h4>
+            <p>The quick brown fox jumps over the lazy dog.</p>
+            <p>Pack my box with five dozen liquor jugs.</p>
+        </div>
+    </div>
+</body>
+</html>

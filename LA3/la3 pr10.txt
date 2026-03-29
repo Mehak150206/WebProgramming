@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h4>Name-Mehak Gupta<br>
+    Registration Number-24BDS0210</h4>
+    <meta charset="UTF-8">
+    <title>Checkbox Example</title>
+</head>
+<body>
+
+    <h2>Select Subjects</h2>
+
+    <input type="checkbox" name="subject" value="Math"> Math<br>
+    <input type="checkbox" name="subject" value="Science"> Science<br>
+    <input type="checkbox" name="subject" value="English"> English<br>
+    <input type="checkbox" name="subject" value="Computer"> Computer<br><br>
+
+    <button onclick="countSubjects()">Show Selection</button>
+
+    <p id="result"></p>
+
+    <script>
+        function countSubjects() {
+            var subjects = document.getElementsByName("subject");
+            var selectedSubjects = []; // array
+            var count = 0; // counter
+
+            // Loop through checkboxes
+            for (var i = 0; i < subjects.length; i++) {
+                if (subjects[i].checked) {
+                    selectedSubjects.push(subjects[i].value); // add to array
+                    count++;
+                }
+            }
+
+            // Display result
+            if (count > 0) {
+                document.getElementById("result").innerHTML =
+                    "Selected Subjects: " + selectedSubjects.join(", ") +
+                    "<br>Total Selected: " + count;
+            } else {
+                document.getElementById("result").innerHTML =
+                    "No subjects selected";
+            }
+        }
+    </script>
+
+</body>
+</html>

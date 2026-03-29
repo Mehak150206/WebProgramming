@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h4>Name-Mehak Gupta<br>
+    Registration Number-24BDS0210</h4>
+    <meta charset="UTF-8">
+    <title>Hello World Button</title>
+</head>
+<body>
+
+    <h2 id="message">Click the button to display message</h2>
+
+    <button onclick="showMessage()">Click Me</button>
+
+    <script>
+        // Function declaration
+        function showMessage() {
+            // Variable declaration
+            var element = document.getElementById("message");
+
+            // Using outerHTML to replace the element
+            element.outerHTML = "<h2>Hello, world!</h2>";
+        }
+    </script>
+
+</body>
+</html>
