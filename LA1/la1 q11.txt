@@ -1,0 +1,124 @@
+Main frame:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portfolio Frames</title>
+</head>
+
+<frameset cols="20%,80%">
+    
+    <!-- Left Frame -->
+    <frame src="left-frame.html">
+    
+    <!-- Right Side Split -->
+    <frameset rows="60%,40%">
+        <frame src="right-top-frame.html">
+        <frame src="right-bottom-frame.html">
+    </frameset>
+
+</frameset>
+
+</html>
+
+Left frame:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Personal Details</title>
+</head>
+
+<body>
+
+<h3>Personal Details</h3>
+
+<img src="profile.png" alt="Profile Image">
+
+<p>Email: mehak@gmail.com</p>
+<p>GitHub: https://github.com/mehak</p>
+<p>LinkedIn: https://linkedin.com/in/mehak</p>
+<p>Phone: +91 8375011032</p>
+<p>Address: Chennai, India</p>
+
+<h3>Skills</h3>
+<ul>
+    <li>HTML – Structure of webpages</li>
+    <li>CSS – Styling and layout</li>
+    <li>JavaScript – Interactivity</li>
+    <li>C++ – Programming logic</li>
+</ul>
+
+<h3>Personality Traits</h3>
+<ul>
+    <li>Hardworking</li>
+    <li>Creative</li>
+    <li>Team Player</li>
+    <li>Quick Learner</li>
+</ul>
+
+</body>
+</html>
+
+Right-top frame:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portfolio Content</title>
+</head>
+
+<body>
+
+<h1>Mehak Gupta</h1>
+
+<p>I am a Computer Science student passionate about web development and problem solving.</p>
+
+<h3>Education</h3>
+<p>B.Tech in Computer Science Engineering</p>
+
+<h3>Projects</h3>
+<ul>
+    <li>Food Delivery Website – Designed using HTML and CSS</li>
+    <li>Student Portal – JavaScript-based application</li>
+</ul>
+
+<h3>Activities & Achievements</h3>
+<ul>
+    <li>Participated in coding competitions</li>
+    <li>Completed web development certification</li>
+</ul>
+
+<h3>Hobbies</h3>
+<p>Reading, Coding, Music</p>
+
+<h3>Languages Known</h3>
+<p>English, Hindi</p>
+
+</body>
+</html>
+
+Right-bottom frame:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Personal Profile</title>
+</head>
+
+<body>
+
+<h3>Personal Profile</h3>
+
+<p>Name: Mehak Gupta</p>
+<p>Father's Name: Mr.Bharat Gupta</p>
+<p>Mother's Name: Mrs. Pinki Gupta</p>
+<p>Date of Birth: 15-02-2006</p>
+<p>Gender: Female</p>
+<p>Nationality: Indian</p>
+
+<h3>Declaration</h3>
+<p>
+I hereby declare that the above information is true and correct to the best of my knowledge and belief.
+</p>
+
+</body>
+</html>
+
+

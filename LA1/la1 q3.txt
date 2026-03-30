@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Block Elements Example</title>
+</head>
+<body>
+
+    <div>
+        <h4> Name-Mehak Gupta <br>
+        Registration number-24BDS0210</h4>
+        <h2>About HTML Block Elements</h2>
+        <p>HTML block elements always start on a new line and take up the full width available.</p>
+        <p>The div, paragraph, and heading tags are common examples of block-level elements.</p>
+    </div>
+
+</body>
+</html>

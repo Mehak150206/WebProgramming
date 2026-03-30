@@ -1,0 +1,262 @@
+Part A and B
+<!DOCTYPE html>
+<html>
+<head>
+<h4>Name-Mehak Gupta<br>
+Registration Number-24BDS0210</h4>
+    <title>Indian Governance Portal</title>
+</head>
+<body>
+
+    <h1 align="center">Indian Governance and State Information Portal</h1>
+
+    <!-- PRESIDENT TABLE -->
+    <h2>President of India</h2>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Name</th>
+            <th>Year of Election</th>
+            <th>Description</th>
+            <th>Email</th>
+        </tr>
+        <tr>
+            <td>Droupadi Murmu</td>
+            <td>2022</td>
+            <td>She is the 15th President of India and the first tribal woman to hold the office.</td>
+            <td>presidentofindia@nic.in</td>
+        </tr>
+    </table>
+
+    <!-- PRIME MINISTER TABLE -->
+    <h2>Prime Minister of India</h2>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Name</th>
+            <th>Year in Office</th>
+            <th>Description</th>
+            <th>Email</th>
+        </tr>
+        <tr>
+            <td>Narendra Modi</td>
+            <td>2014</td>
+            <td>He is the current Prime Minister of India, known for economic and digital reforms.</td>
+            <td>pmindia@gov.in</td>
+        </tr>
+    </table>
+
+    <!-- STATES LIST -->
+    <h2>Chief Ministers of India</h2>
+
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>State</th>
+            <th>Chief Minister</th>
+        </tr>
+
+        <tr>
+            <td><a href="tamilnadu.html">Tamil Nadu</a></td>
+            <td>M. K. Stalin</td>
+        </tr>
+
+        <tr>
+            <td><a href="karnataka.html">Karnataka</a></td>
+            <td>Siddaramaiah</td>
+        </tr>
+
+        <tr>
+            <td><a href="maharashtra.html">Maharashtra</a></td>
+            <td>Eknath Shinde</td>
+        </tr>
+
+        <tr>
+            <td><a href="uttarpradesh.html">Uttar Pradesh</a></td>
+            <td>Yogi Adityanath</td>
+        </tr>
+
+    </table>
+
+</body>
+</html>
+ Part C
+Tamil Nadu
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tamil Nadu</title>
+</head>
+<body>
+
+    <h1>Tamil Nadu</h1>
+
+    <h2>Major Projects</h2>
+    <ul>
+        <li>Chennai Metro Rail Project</li>
+        <li>Smart City Mission</li>
+        <li>Coastal Road Development</li>
+    </ul>
+
+    <h2>Ongoing Developments</h2>
+    <ul>
+        <li>IT park expansions</li>
+        <li>Industrial corridor development</li>
+        <li>Renewable energy projects</li>
+    </ul>
+
+    <h2>Importance of the State</h2>
+    <p>
+        Tamil Nadu is one of India's most industrialized states. It is a major hub for
+        automobile, textile, and IT industries. It also has rich cultural heritage.
+    </p>
+
+    <h2>Tourist Attractions</h2>
+    <ul>
+        <li>Ooty</li>
+        <li>Mahabalipuram</li>
+        <li>Madurai Meenakshi Temple</li>
+        <li>Kanyakumari</li>
+    </ul>
+
+    <br>
+    <a href="index.html">Back to Home</a>
+
+</body>
+</html>
+
+Karnataka
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Karnataka</title>
+</head>
+<body>
+
+    <h1>Karnataka</h1>
+
+    <h2>Major Projects</h2>
+    <ul>
+        <li>Bangalore Metro</li>
+        <li>Smart City Projects</li>
+    </ul>
+
+    <h2>Ongoing Developments</h2>
+    <ul>
+        <li>Startup ecosystem growth</li>
+        <li>Infrastructure development</li>
+    </ul>
+
+    <h2>Importance of the State</h2>
+    <p>
+        Karnataka is known as the Silicon Valley of India. It is a leader in IT exports
+        and innovation.
+    </p>
+
+    <h2>Tourist Attractions</h2>
+    <ul>
+        <li>Mysore Palace</li>
+        <li>Coorg</li>
+        <li>Hampi</li>
+    </ul>
+
+    <br>
+    <a href="index.html">Back to Home</a>
+
+</body>
+</html>
+
+Maharashtra
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Maharashtra</title>
+</head>
+<body>
+
+    <h1>Maharashtra</h1>
+
+    <h2>Major Projects</h2>
+    <ul>
+        <li>Mumbai Metro Rail Project</li>
+        <li>Coastal Road Project</li>
+        <li>Navi Mumbai International Airport</li>
+    </ul>
+
+    <h2>Ongoing Developments</h2>
+    <ul>
+        <li>Infrastructure modernization in Mumbai and Pune</li>
+        <li>Industrial corridor development</li>
+        <li>Smart City initiatives</li>
+    </ul>
+
+    <h2>Importance of the State</h2>
+    <p>
+        Maharashtra is one of India's most economically significant states. 
+        It is home to Mumbai, the financial capital of India, and plays a key role 
+        in industry, finance, and entertainment.
+    </p>
+
+    <h2>Tourist Attractions</h2>
+    <ul>
+        <li>Gateway of India</li>
+        <li>Ajanta and Ellora Caves</li>
+        <li>Lonavala</li>
+        <li>Shirdi</li>
+    </ul>
+
+    <br>
+    <a href="index.html">Back to Home</a>
+
+</body>
+</html>
+
+Uttar Pradesh
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Uttar Pradesh</title>
+</head>
+<body>
+
+    <h1>Uttar Pradesh</h1>
+
+    <h2>Major Projects</h2>
+    <ul>
+        <li>Purvanchal Expressway</li>
+        <li>Bundelkhand Expressway</li>
+        <li>Jewar International Airport</li>
+    </ul>
+
+    <h2>Ongoing Developments</h2>
+    <ul>
+        <li>Infrastructure expansion and road connectivity</li>
+        <li>Industrial development zones</li>
+        <li>Smart city initiatives</li>
+    </ul>
+
+    <h2>Importance of the State</h2>
+    <p>
+        Uttar Pradesh is the most populous state in India. It holds great cultural, 
+        historical, and political significance and contributes significantly to 
+        agriculture and tourism.
+    </p>
+
+    <h2>Tourist Attractions</h2>
+    <ul>
+        <li>Taj Mahal</li>
+        <li>Varanasi Ghats</li>
+        <li>Ayodhya</li>
+        <li>Fatehpur Sikri</li>
+    </ul>
+
+    <br>
+    <a href="index.html">Back to Home</a>
+
+</body>
+</html>
+
+
+
+
+
+
+

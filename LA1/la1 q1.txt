@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My First Web Page</title>
+</head>
+<body>
+<h3> Name-Mehak Gupta<br>
+Registration number- 24BDS0210</h3>
+ <h1>Main Heading</h1>
+<p>This is a paragraph displayed on the web page.</p>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML Tags Example</title>
+<h4>Name-Mehak Gupta<br>
+Registration Numner-24BDS0210</h4>
+</head>
+<body>
+
+    <!-- Heading -->
+    <h1>Welcome to My Web Page</h1>
+
+    <!-- Paragraph -->
+    <p>This page demonstrates the use of different HTML tags including image, link, and list.</p>
+
+    <!-- Image -->
+    <img src="google.jpg" alt="Sample Image">
+
+    <br><br>
+
+    <!-- Hyperlink -->
+    <a href="https://www.google.com">Visit Google</a>
+
+    <!-- Unordered List -->
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+    </ul>
+
+</body>
+</html>

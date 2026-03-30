@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Line Break and Horizontal Line Example</title>
+</head>
+<body>
+    <h4> Name-Mehak Gupta<br>
+Registration number-24BDS0210</h4>
+
+    <p>
+        This is the first paragraph.<br>
+        This line appears after the first line break.<br>
+        This line appears after the second line break.
+    </p>
+
+    <hr>
+
+    <p>
+        This is the second paragraph displayed after the horizontal line.
+    </p>
+
+</body>
+</html>
+
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tech Learning Hub</title>
+</head>
+<body>
+
+    <h4>Name-Mehak Gupta<br>
+    Registration number-24BDS0210
+    <h1>Tech Learning Hub</h1>
+    <p>
+        Tech Learning Hub provides quality training in programming, web development, 
+        and modern technologies to help students build successful careers.
+    </p>
+    <p>
+        <b>Admissions are open for 2025 batch!</b><br>
+        <i>Limited seats available, enroll soon to secure your spot.</i>
+    </p>
+        <img src="images.jpg" alt="Tech Learning Hub Logo" width="300">
+    </a>
+
+    <br><br>
+
+    
+    <a href="https://itnthub.tn.gov.in/" target="_blank">Enroll Now</a>
+
+    <!-- Course List -->
+    <h2>Courses Offered</h2>
+    <ul>
+        <li>Web Development</li>
+        <li>Data Structures and Algorithms</li>
+        <li>Python Programming</li>
+    </ul>
+    <div>
+        <h2>Announcements</h2>
+        <p>1. New AI and Machine Learning course launching soon.</p>
+        <p>2. Weekend workshops available for working professionals.</p>
+    </div>
+    <!-- Footer -->
+    <hr>
+    <footer>
+        <p>© 2025 Tech Learning Hub</p>
+    </footer>
+</body>
+</html>
+

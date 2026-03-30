@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Div with Formatted Text</title>
+</head>
+<body>
+    <h4>Name-Mehak Gupta<br>
+     Registration number-24BDS0210</h4>
+
+    <div>
+        <h2>Introduction to HTML</h2>
+        <p>
+            HTML is a <b>markup</b> language used to create <i>webpages</i> on the internet.
+        </p>
+    </div>
+
+</body>
+</html>

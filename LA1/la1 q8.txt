@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Eligibility Rules</title>
+</head>
+<body>
+<h4>Name-Mehak Gupta<br>
+Registration number-24BDS0210
+    <section>
+        <h2>Internal Assessment Eligibility Rules</h2>
+        <p>
+            A student is eligible for the internal assessment only if the attendance is 
+            greater than 75% (&gt; 75%)<br>
+ the assignment count is less than 5 (&lt; 5)<br>
+             the internal score is less than or equal to 40 (&le; 40).
+        </p>
+    </section>
+
+</body>
+</html>
+
+

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Sources Example</title>
+</head>
+<body>
+
+<h4>
+Name - Mehak Gupta<br>
+Registration Number - 24BDS0210
+</h4>
+
+<h2>Adding Images from Different Sources</h2>
+
+<!-- Image from External Website -->
+<h3>1. Image from External URL</h3>
+<img src="https://images.unsplash.com/photo-1518770660439-4636190af475"
+     alt="External Image" width="300">
+
+<br><br>
+
+<!-- Image from Local Computer -->
+<h3>2. Image from Local Computer</h3>
+<img src="apple.png"
+     alt="Local Image" width="300">
+
+<br><br>
+
+<!-- Image from Project Folder -->
+<h3>3. Image from Project Folder</h3>
+<img src="web.png"
+     alt="Project Folder Image" width="300">
+
+</body>
+</html>
+

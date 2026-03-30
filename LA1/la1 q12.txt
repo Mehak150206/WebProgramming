@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <h3>Name-Mehak Gupta<br>
+        Registration Number-24BDS0210
+    <title>Emergency Helpline Numbers in India</title>
+</head>
+<body>
+
+    <h1 align="center">Emergency Helpline Numbers in India</h1>
+
+    <!-- 1. POLICE -->
+    <table border="1" cellpadding="10" width="100%">
+        <caption><h2>Police Emergency</h2></caption>
+        <tr>
+            <td><img src="police.png" width="100"></td>
+            <td>
+                <b>Description:</b> For law enforcement, crime reporting, and public safety.<br>
+                <b>Helpline Number:</b> 100<br>
+                <b>Email:</b> police@gov.in
+            </td>
+        </tr>
+    </table>
+
+    <br>
+
+    <!-- 2. AMBULANCE -->
+    <table border="1" cellpadding="10" width="100%">
+        <caption><h2>Medical / Ambulance</h2></caption>
+        <tr>
+            <td><img src="ambulance.png" width="100"></td>
+            <td>
+                <b>Description:</b> Provides emergency medical assistance and ambulance services.<br>
+                <b>Helpline Number:</b> 102 / 108<br>
+                <b>Email:</b> health@gov.in
+            </td>
+        </tr>
+    </table>
+
+    <br>
+
+    <!-- 3. FIRE -->
+    <table border="1" cellpadding="10" width="100%">
+        <caption><h2>Fire Emergency</h2></caption>
+        <tr>
+            <td><img src="fire.png" width="100"></td>
+            <td>
+                <b>Description:</b> Fire rescue and emergency fire control services.<br>
+                <b>Helpline Number:</b> 101<br>
+                <b>Email:</b> fire@gov.in
+            </td>
+        </tr>
+    </table>
+
+    <br>
+
+    <!-- 4. WOMEN SAFETY -->
+    <table border="1" cellpadding="10" width="100%">
+        <caption><h2>Women Helpline</h2></caption>
+        <tr>
+            <td><img src="women.png" width="100"></td>
+            <td>
+                <b>Description:</b> Assistance for women facing harassment or violence.<br>
+                <b>Helpline Number:</b> 1091<br>
+                <b>Email:</b> womenhelp@gov.in
+            </td>
+        </tr>
+    </table>
+
+    <br>
+
+    <!-- 5. CHILD HELPLINE -->
+    <table border="1" cellpadding="10" width="100%">
+        <caption><h2>Child Helpline</h2></caption>
+        <tr>
+            <td><img src="child.png" width="100"></td>
+            <td>
+                <b>Description:</b> Support for children in distress or danger.<br>
+                <b>Helpline Number:</b> 1098<br>
+                <b>Email:</b> childline@gov.in
+            </td>
+        </tr>
+    </table>
+
+    <br>
+
+    <!-- 6. DISASTER MANAGEMENT -->
+    <table border="1" cellpadding="10" width="100%">
+        <caption><h2>Disaster Management</h2></caption>
+        <tr>
+            <td><img src="disaster.png" width="100"></td>
+            <td>
+                <b>Description:</b> Help during natural disasters like floods, earthquakes, etc.<br>
+                <b>Helpline Number:</b> 108 / 1078<br>
+                <b>Email:</b> disaster@gov.in
+            </td>
+        </tr>
+    </table>
+
+    <br>
+
+    <!-- 7. SENIOR CITIZEN -->
+    <table border="1" cellpadding="10" width="100%">
+        <caption><h2>Senior Citizen Helpline</h2></caption>
+        <tr>
+            <td><img src="Senior-Citizen.png" width="100"></td>
+            <td>
+                <b>Description:</b> Assistance and protection for elderly citizens.<br>
+                <b>Helpline Number:</b> 14567<br>
+                <b>Email:</b> senior@gov.in
+            </td>
+        </tr>
+    </table>
+
+    <br>
+
+    <!-- 8. ROAD ACCIDENT -->
+    <table border="1" cellpadding="10" width="100%">
+        <caption><h2>Road Accident Emergency</h2></caption>
+        <tr>
+            <td><img src="road.png" width="100"></td>
+            <td>
+                <b>Description:</b> Immediate help for road accidents and highway emergencies.<br>
+                <b>Helpline Number:</b> 1073<br>
+                <b>Email:</b> roadhelp@gov.in
+            </td>
+        </tr>
+    </table>
+
+    <br>
+
+    <!-- 9. CYBER CRIME -->
+    <table border="1" cellpadding="10" width="100%">
+        <caption><h2>Cyber Crime Helpline</h2></caption>
+        <tr>
+            <td><img src="cyber.png" width="100"></td>
+            <td>
+                <b>Description:</b> Report online fraud, hacking, and cyber crimes.<br>
+                <b>Helpline Number:</b> 1930<br>
+                <b>Email:</b> cybercrime@gov.in
+            </td>
+        </tr>
+    </table>
+
+    <br>
+
+    <!-- 10. NATIONAL EMERGENCY -->
+    <table border="1" cellpadding="10" width="100%">
+        <caption><h2>National Emergency Number</h2></caption>
+        <tr>
+            <td><img src="emergency.png" width="100"></td>
+            <td>
+                <b>Description:</b> Universal emergency number connecting all services.<br>
+                <b>Helpline Number:</b> 112<br>
+                <b>Email:</b> emergency@gov.in
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>
+
+
+
+
+
