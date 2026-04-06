@@ -1,0 +1,52 @@
+App.js:
+import React, { useState } from "react";
+
+function App() {
+  const [task, setTask] = useState("");     // string state
+  const [tasks, setTasks] = useState([]);   // array state
+
+  const addTask = () => {
+    if (task.trim() === "") return;
+
+    // add new task using spread operator
+    setTasks([...tasks, task]);
+
+    setTask(""); // clear input
+  };
+
+  return (
+    <div>
+      <h1>To do List</h1>
+
+      <p>Name: Mehak Gupta</p>
+      <p>Registration No: 24BDS0210</p>
+
+      {/* Controlled Input */}
+      <input
+        type="text"
+        placeholder="Enter a task"
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
+      />
+
+      <button onClick={addTask}>Add Task</button>
+
+      {/* Display Tasks */}
+      <ul>
+        {tasks.map((t, index) => (
+          <li key={index}>{t}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+Index.js:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+

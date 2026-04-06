@@ -1,0 +1,201 @@
+App.js:
+import { useState } from "react";
+import Header from "./Header";
+import Search from "./Search";
+import CountryList from "./CountryList";
+import { fetchCountries } from "./api";
+import "./App.css";
+
+export default function App() {
+  const [countries, setCountries] = useState([]);
+
+  const handleSearch = async (query) => {
+    if (!query.trim()) {
+      setCountries([]);
+      return;
+    }
+
+    const results = await fetchCountries(query);
+    setCountries(results);
+  };
+
+  return (
+    <div>
+      <Header />
+      <Search onSearch={handleSearch} />
+      <CountryList countries={countries} />
+    </div>
+  );
+}
+
+Header.js:
+export default function Header() {
+  return (
+    <header style={{ textAlign: "center", padding: "20px" }}>
+      <h1>🌍 Country Explorer</h1>
+      <p style={{ marginTop: "5px", fontSize: "14px", color: "gray" }}>
+        Name: Mehak Gupta| Reg No: 24BDS0210
+      </p>
+    </header>
+  );
+}
+
+Search.js:
+import { useState } from "react";
+
+export default function Search({ onSearch }) {
+  const [text, setText] = useState("");
+
+  const handleSearch = () => {
+    onSearch(text);
+  };
+
+  return (
+    <div style={{ textAlign: "center", marginBottom: "20px" }}>
+      <input
+        type="text"
+        placeholder="Search country..."
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        style={{ padding: "8px", width: "250px" }}
+      />
+
+      <button onClick={handleSearch} style={{ marginLeft: "10px", padding: "8px" }}>
+        Search
+      </button>
+    </div>
+  );
+}
+
+CountryList.js:
+import CountryCard from "./CountryCard";
+
+export default function CountryList({ countries }) {
+  return (
+    <div className="grid">
+      {countries.map((country) => (
+        <CountryCard key={country.id} country={country} />
+      ))}
+    </div>
+  );
+}
+
+CountryCard.js:
+export default function CountryCard({ country }) {
+  return (
+    <div className="card">
+      <img src={country.flag} alt={country.name} />
+
+      <h3>{country.name}</h3>
+
+      <p><b>Capital:</b> {country.capital}</p>
+      <p><b>Population:</b> {country.population}</p>
+      <p><b>Region:</b> {country.region}</p>
+    </div>
+  );
+}
+
+Api.js:
+export const fetchCountries = async (query) => {
+  const response = await fetch(
+    `https://restcountries.com/v3.1/name/${query}`
+  );
+
+  const data = await response.json();
+
+  if (!Array.isArray(data)) return [];
+
+  return data.map((country) => ({
+    name: country.name?.common,
+    capital: country.capital?.[0] || "N/A",
+    population: country.population,
+    region: country.region,
+    flag: country.flags?.png,
+  }));
+};
+
+
+App.css:
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f6f8;
+}
+
+h1 {
+  margin: 0;
+  color: #333;
+}
+
+/* GRID LAYOUT */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* CARD DESIGN */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card img {
+  width: 100%;
+  height: 140px;
+  object-fit: contain;   /* IMPORTANT FIX */
+  background-color: #f0f0f0;
+  padding: 6px;
+  border-radius: 8px;
+}
+
+/* TEXT */
+.card h3 {
+  margin: 10px 0 5px;
+  font-size: 16px;
+  color: #222;
+}
+
+.card p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: #555;
+}
+
+/* SEARCH SECTION (optional improvement) */
+input {
+  padding: 8px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  padding: 8px 12px;
+  margin-left: 8px;
+  border: none;
+  background-color: #2d6cdf;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1b4fb5;
+}
+
+
+
+
+
+

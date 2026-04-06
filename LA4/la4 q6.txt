@@ -1,0 +1,150 @@
+App.js:
+import React, { useState } from "react";
+import Header from "./Header";
+import Search from "./Search";
+import Dashboard from "./Dashboard";
+import { fetchWeather } from "./api";
+
+function App() {
+  const [weather, setWeather] = useState(null);
+
+  const handleSearch = async (city) => {
+    console.log("Searching for:", city);
+
+    const data = await fetchWeather(city);
+
+    console.log("API response:", data);
+
+    if (data) {
+      setWeather(data);
+    }
+  };
+
+  return (
+    <div>
+      <Header />
+      <Search onSearch={handleSearch} />
+      <Dashboard weather={weather} />
+
+      <p>Name: Mehak Gupta</p>
+      <p>Registration No: 24BDS0210</p>
+    </div>
+  );
+}
+
+export default App;
+
+Header.js:
+import React from "react";
+
+function Header() {
+  return <h1>Weather Dashboard</h1>;
+}
+
+export default Header;
+
+Search.js:
+import React, { useState } from "react";
+
+function Search({ onSearch }) {
+  const [city, setCity] = useState("");
+
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Enter city"
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+      />
+      <button onClick={() => onSearch(city)}>Search</button>
+    </div>
+  );
+}
+
+export default Search;
+
+Dashboard.js:
+import React from "react";
+
+function Dashboard({ weather }) {
+  if (!weather) return <p>No data available</p>;
+
+  return (
+    <div>
+      <h2>{weather.city}</h2>
+      <p>Temperature: {weather.temp} °C</p>
+      <p>Description: {weather.description}</p>
+      <p>Humidity: {weather.humidity}%</p>
+      <p>Wind Speed: {weather.wind} m/s</p>
+    </div>
+  );
+}
+
+export default Dashboard;
+
+api.js:
+const API_KEY = "15b91309bc2b8c2e180d7d2e57e0f3bd"; // your key
+
+export const fetchWeather = async (city) => {
+  try {
+    const res = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+    );
+
+    const data = await res.json();
+
+    console.log("Full API Data:", data);
+
+    // error handling
+    if (data.cod !== 200) {
+      alert(data.message);
+      return null;
+    }
+
+    return {
+      city: data.name,
+      temp: data.main.temp,
+      description: data.weather[0].description,
+      humidity: data.main.humidity,
+      wind: data.wind.speed,
+    };
+  } catch (error) {
+    console.log("Error:", error);
+    alert("Error fetching data");
+    return null;
+  }
+};
+
+App.css:
+body {
+  font-family: Arial;
+  text-align: center;
+}
+
+input {
+  padding: 8px;
+  margin: 10px;
+}
+
+button {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.card {
+  margin: 20px auto;
+  padding: 20px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+Index.js:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+

@@ -1,0 +1,88 @@
+App.js:
+import React, { useState } from "react";
+import "./App.css";
+
+function App() {
+  const images = [
+    "https://picsum.photos/id/1015/400/300",
+    "https://picsum.photos/id/1016/400/300",
+    "https://picsum.photos/id/1018/400/300",
+    "https://picsum.photos/id/1020/400/300",
+    "https://picsum.photos/id/1024/400/300"
+  ];
+
+  const [selectedImage, setSelectedImage] = useState(images[0]);
+
+  return (
+    <div className="container">
+      <h1>Image Gallery</h1>
+
+      <p>Name: Mehak Gupta</p>
+      <p>Registration No: 24BDS0210</p>
+
+      {/* Large Preview */}
+      <div className="preview">
+        <img src={selectedImage} alt="Preview" />
+      </div>
+
+      {/* Thumbnails */}
+      <div className="thumbnails">
+        {images.map((img, index) => (
+          <img
+            key={index}
+            src={img}
+            alt="thumb"
+            onClick={() => setSelectedImage(img)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default App;
+ App.css:
+.container {
+  text-align: center;
+  padding: 20px;
+}
+
+.preview img {
+  width: 400px;
+  height: 300px;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
+.preview img:hover {
+  transform: scale(1.05);
+}
+
+.thumbnails {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.thumbnails img {
+  width: 80px;
+  height: 60px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: transform 0.3s;
+}
+
+.thumbnails img:hover {
+  transform: scale(1.2);
+}
+
+Index.js:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+
+

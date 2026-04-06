@@ -1,0 +1,34 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+function Welcome(props) {
+  return (
+    <div style={{
+      backgroundColor: "teal",
+      color: "white",
+      padding: "20px",
+      textAlign: "center",
+      borderRadius: "10px"
+    }}>
+      
+      <p><b>Name:</b> Mehak Gupta</p>
+      <p><b>Registration No:</b> 24BDS0210</p>
+      <h1>Hello, {props.name}!</h1>
+      <h2>Welcome to {props.city} 🎉</h2>
+
+      <p>
+        We’re glad to have you here. This React application shows how functional
+        components and props can be used to build simple and reusable user
+        interfaces.
+      </p>
+
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <Welcome name="Mehak" city="Chennai" />
+);
+

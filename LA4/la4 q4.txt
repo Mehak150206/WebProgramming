@@ -1,0 +1,58 @@
+App.js:
+import React, { useState } from "react";
+
+function App() {
+  const [m1, setM1] = useState("");
+  const [m2, setM2] = useState("");
+  const [m3, setM3] = useState("");
+  const [result, setResult] = useState("");
+
+  const calculate = () => {
+    const a = Number(m1);
+    const b = Number(m2);
+    const c = Number(m3);
+
+    if (m1 === "" || m2 === "" || m3 === "") {
+      setResult("Please enter all marks");
+      return;
+    }
+
+    const avg = (a + b + c) / 3;
+
+    let grade = "";
+    if (avg >= 90) grade = "A";
+    else if (avg >= 75) grade = "B";
+    else if (avg >= 60) grade = "C";
+    else if (avg >= 50) grade = "D";
+    else grade = "F";
+
+    setResult(`Average: ${avg.toFixed(2)} | Grade: ${grade}`);
+  };
+
+  return (
+    <div>
+
+      <p>Name: Mehak Gupta</p>
+      <p>Registration No: 24BDS0210</p>
+      <h1>Grade Calculator</h1>
+
+      <input type="number" onChange={(e) => setM1(e.target.value)} /><br /><br />
+      <input type="number" onChange={(e) => setM2(e.target.value)} /><br /><br />
+      <input type="number" onChange={(e) => setM3(e.target.value)} /><br /><br />
+
+      <button onClick={calculate}>Calculate</button>
+
+      <h2>{result}</h2>
+    </div>
+  );
+}
+
+export default App;
+Index.js:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+
