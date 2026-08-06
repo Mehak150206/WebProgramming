@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soirée — Events Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --gold: #C9A84C; --gold-light: #F0D98A; --gold-dark: #8A6A1E;
+  --ink: #1A1612; --cream: #FAF7F2; --warm-gray: #8C857A;
+  --border: rgba(201,168,76,0.25);
+}
+body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; }
+
+nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.2rem 3rem; border-bottom: 0.5px solid var(--border);
+  background: rgba(250,247,242,0.96); position: sticky; top: 0; z-index: 100;
+}
+.logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; cursor: pointer; }
+.logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 1.75rem; align-items: center; }
+.nav-links a { font-size: 0.82rem; color: var(--warm-gray); text-decoration: none; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 500; cursor: pointer; }
+.nav-links a:hover { color: var(--ink); }
+.nav-cta { background: var(--gold); color: white; padding: 0.5rem 1.25rem; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; cursor: pointer; border: none; }
+.nav-cta:hover { background: var(--gold-dark); }
+.nav-user { display: flex; align-items: center; gap: 0.75rem; }
+.nav-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--gold); color: white; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 500; cursor: pointer; }
+.nav-logout { font-size: 0.78rem; color: var(--warm-gray); cursor: pointer; background: none; border: none; font-family: 'DM Sans', sans-serif; }
+.nav-logout:hover { color: var(--ink); }
+
+section { display: none; }
+section.active { display: block; }
+
+.btn-primary { background: var(--ink); color: white; padding: 0.8rem 2rem; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; }
+.btn-primary:hover { background: #2D2520; }
+.btn-outline { background: transparent; color: var(--ink); padding: 0.8rem 2rem; border: 1px solid var(--ink); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; }
+.btn-outline:hover { background: var(--ink); color: white; }
+
+.form-group { margin-bottom: 1.4rem; }
+.form-group label { display: block; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--warm-gray); margin-bottom: 0.5rem; font-weight: 500; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.75rem 1rem; border: 0.5px solid #D5CFC6; background: white; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--ink); outline: none; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+.form-group textarea { height: 100px; resize: vertical; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-submit { width: 100%; background: var(--ink); color: white; padding: 1rem; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; margin-top: 0.5rem; }
+.form-submit:hover { background: #2D2520; }
+
+/* PROFILE */
+.profile-outer { max-width: 900px; margin: 0 auto; padding: 3.5rem 3rem 5rem; }
+.profile-banner { background: var(--ink); padding: 3rem; display: flex; align-items: center; gap: 2.5rem; position: relative; overflow: hidden; margin-bottom: 1.5rem; }
+.profile-banner::before { content: ''; position: absolute; right: -70px; top: -70px; width: 280px; height: 280px; border-radius: 50%; border: 55px solid rgba(201,168,76,0.1); }
+.profile-banner::after { content: ''; position: absolute; right: 120px; bottom: -80px; width: 180px; height: 180px; border-radius: 50%; border: 35px solid rgba(201,168,76,0.07); }
+.profile-av { width: 100px; height: 100px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 2.4rem; color: white; border: 3px solid rgba(201,168,76,0.45); flex-shrink: 0; position: relative; z-index: 1; }
+.profile-banner-info { position: relative; z-index: 1; }
+.profile-banner-info h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: white; margin-bottom: 0.3rem; line-height: 1.1; }
+.profile-tag { color: rgba(255,255,255,0.45); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.profile-reg-badge { display: inline-block; margin-top: 0.85rem; background: rgba(201,168,76,0.15); border: 0.5px solid rgba(201,168,76,0.35); color: var(--gold-light); font-size: 0.72rem; padding: 0.3rem 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.profile-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
+.pcard { background: white; border: 0.5px solid var(--border); padding: 1.6rem 1.75rem; }
+.pcard.full { grid-column: 1 / -1; }
+.pcard-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold); font-weight: 500; margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.6rem; }
+.pcard-label::after { content: ''; flex: 1; height: 0.5px; background: var(--border); }
+.pcard-value { font-size: 1rem; color: var(--ink); line-height: 1.6; }
+.pcard-sub { font-size: 0.8rem; color: var(--warm-gray); margin-top: 0.3rem; }
+.hobby-row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.4rem; }
+.hobby-pill { background: #FFF8E7; color: var(--gold-dark); font-size: 0.8rem; padding: 0.38rem 1rem; border: 0.5px solid rgba(201,168,76,0.3); }
+.profile-stats { display: grid; grid-template-columns: repeat(3,1fr); background: white; border: 0.5px solid var(--border); margin-bottom: 1.75rem; }
+.pstat { text-align: center; padding: 1.5rem 1rem; border-right: 0.5px solid var(--border); }
+.pstat:last-child { border-right: none; }
+.pstat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--gold); line-height: 1; }
+.pstat-lbl { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--warm-gray); margin-top: 0.3rem; }
+.visit-section { background: white; border: 0.5px solid var(--border); padding: 2rem 2.25rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+.visit-section h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 0.35rem; }
+.visit-section p { font-size: 0.85rem; color: var(--warm-gray); line-height: 1.6; }
+.visit-btn { background: var(--gold); color: white; padding: 0.9rem 2rem; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; white-space: nowrap; flex-shrink: 0; display: flex; align-items: center; gap: 0.5rem; }
+.visit-btn:hover { background: var(--gold-dark); }
+
+/* HOME */
+.hero { padding: 6rem 3rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1100px; margin: 0 auto; }
+.hero-tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold); font-weight: 500; margin-bottom: 1rem; }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem; }
+.hero p { color: var(--warm-gray); line-height: 1.8; font-size: 1rem; margin-bottom: 2rem; font-weight: 300; }
+.hero-btns { display: flex; gap: 1rem; }
+.hero-card { background: white; border: 0.5px solid var(--border); padding: 2rem; box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
+.event-badge { display: inline-block; background: #FFF8E7; color: var(--gold-dark); font-size: 0.7rem; padding: 0.3rem 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; font-weight: 500; }
+.hero-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem; }
+.event-meta { display: flex; gap: 1rem; margin: 1rem 0; }
+.meta-item { font-size: 0.8rem; color: var(--warm-gray); }
+.meta-item strong { display: block; color: var(--ink); font-size: 0.9rem; }
+.progress-bar { height: 3px; background: #F0EBE3; border-radius: 2px; margin: 1.5rem 0 0.5rem; }
+.progress-fill { height: 100%; background: var(--gold); border-radius: 2px; width: 72%; }
+.prog-label { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--warm-gray); }
+.stats-strip { display: grid; grid-template-columns: repeat(4,1fr); border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+.stat-box { padding: 2rem 1.5rem; text-align: center; border-right: 0.5px solid var(--border); }
+.stat-box:last-child { border-right: none; }
+.stat-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); line-height: 1; }
+.stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--warm-gray); margin-top: 0.4rem; }
+
+/* EVENTS */
+.page-header { padding: 3rem 3rem 1.5rem; border-bottom: 0.5px solid var(--border); max-width: 1100px; margin: 0 auto; }
+.page-header h2 { font-family: 'Playfair Display', serif; font-size: 2rem; }
+.page-header p { color: var(--warm-gray); margin-top: 0.4rem; font-size: 0.9rem; }
+.filters { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
+.filter-btn { padding: 0.4rem 1rem; font-size: 0.78rem; border: 0.5px solid var(--border); background: white; cursor: pointer; letter-spacing: 0.05em; font-family: 'DM Sans', sans-serif; color: var(--warm-gray); }
+.filter-btn.active { background: var(--ink); color: white; border-color: var(--ink); }
+.search-wrap { max-width: 1100px; margin: 1.5rem auto 0; padding: 0 3rem; }
+.search-box { display: flex; border: 0.5px solid var(--border); background: white; overflow: hidden; }
+.search-box input { flex: 1; padding: 0.85rem 1.25rem; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--ink); outline: none; background: white; }
+.search-box button { background: var(--ink); color: white; border: none; padding: 0.85rem 1.5rem; cursor: pointer; font-size: 0.85rem; font-family: 'DM Sans', sans-serif; }
+.search-box button:hover { background: #2D2520; }
+.events-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5px; background: var(--border); max-width: 1100px; margin: 1.5px auto 0; }
+.event-card { background: white; padding: 1.75rem; cursor: pointer; transition: background 0.2s; }
+.event-card:hover { background: #FDFAF5; }
+.ec-cat { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); font-weight: 500; margin-bottom: 0.75rem; }
+.ec-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 0.75rem; line-height: 1.3; }
+.ec-date { font-size: 0.82rem; color: var(--warm-gray); margin-bottom: 0.5rem; }
+.ec-venue { font-size: 0.82rem; color: var(--warm-gray); }
+.ec-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 1.25rem; padding-top: 1rem; border-top: 0.5px solid var(--border); }
+.ec-price { font-weight: 500; font-size: 0.9rem; }
+.ec-spots { font-size: 0.75rem; color: var(--warm-gray); }
+.sold-out { color: #C0392B; font-size: 0.75rem; }
+.no-results { padding: 3rem; text-align: center; color: var(--warm-gray); font-size: 0.9rem; background: white; grid-column: 1/-1; }
+
+/* TICKET MODAL */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(26,22,18,0.6); z-index: 200; align-items: center; justify-content: center; }
+.modal-overlay.open { display: flex; }
+.modal { background: var(--cream); width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; }
+.modal-header { padding: 1.75rem 2rem 1.25rem; border-bottom: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.modal-header h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; }
+.modal-close { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--warm-gray); }
+.modal-body { padding: 1.75rem 2rem; }
+.ticket-info { background: white; border: 0.5px solid var(--border); padding: 1.25rem; margin-bottom: 1.5rem; }
+.ticket-info p { font-size: 0.82rem; color: var(--warm-gray); margin-bottom: 0.25rem; }
+.ticket-info strong { color: var(--ink); font-size: 0.95rem; }
+.qty-control { display: flex; align-items: center; gap: 1rem; margin: 1rem 0 1.5rem; }
+.qty-label { font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--warm-gray); }
+.qty-btn { width: 32px; height: 32px; border: 0.5px solid var(--border); background: white; cursor: pointer; font-size: 1.1rem; }
+.qty-btn:hover { background: var(--cream); }
+.qty-num { font-size: 1.1rem; font-weight: 500; min-width: 24px; text-align: center; }
+.total-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-top: 0.5px solid var(--border); margin-bottom: 1.25rem; }
+.total-row span { font-size: 0.85rem; color: var(--warm-gray); }
+.total-row strong { font-family: 'Playfair Display', serif; font-size: 1.4rem; }
+.book-btn { width: 100%; background: var(--gold); color: white; border: none; padding: 1rem; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
+.book-btn:hover { background: var(--gold-dark); }
+.booking-success { display: none; text-align: center; padding: 2.5rem 1rem; }
+.booking-success .check { width: 56px; height: 56px; background: #ECFAF3; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 1rem; }
+.booking-success h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #1A7A44; margin-bottom: 0.5rem; }
+.booking-success p { color: var(--warm-gray); font-size: 0.9rem; }
+
+/* CREATE */
+.create-wrap { max-width: 680px; margin: 0 auto; padding: 3rem; }
+.create-wrap h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 0.4rem; }
+.create-wrap > p { color: var(--warm-gray); margin-bottom: 2.5rem; font-size: 0.9rem; }
+.success-msg { display: none; text-align: center; padding: 1.5rem 2rem; background: #F0F9F4; border: 0.5px solid #A8D9BC; margin-top: 1rem; }
+.success-msg h3 { color: #2D7A50; font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 0.3rem; }
+.success-msg p { color: #2D7A50; font-size: 0.85rem; }
+
+/* DASHBOARD */
+.dash-wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 3rem; }
+.dash-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; }
+.dash-header h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; }
+.dash-header p { color: var(--warm-gray); font-size: 0.85rem; margin-top: 0.3rem; }
+.dash-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-bottom: 2rem; }
+.dash-stat { background: white; border: 0.5px solid var(--border); padding: 1.25rem 1.5rem; }
+.ds-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--warm-gray); margin-bottom: 0.5rem; }
+.ds-val { font-family: 'Playfair Display', serif; font-size: 2rem; line-height: 1; }
+.ds-change { font-size: 0.75rem; color: #2D7A50; margin-top: 0.3rem; }
+.dash-content { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+.dash-table-wrap { background: white; border: 0.5px solid var(--border); }
+.dt-header { padding: 1rem 1.5rem; border-bottom: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.dt-header h3 { font-size: 0.9rem; font-weight: 500; }
+table { width: 100%; border-collapse: collapse; }
+th { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--warm-gray); text-align: left; padding: 0.75rem 1.5rem; border-bottom: 0.5px solid var(--border); }
+td { font-size: 0.85rem; padding: 0.9rem 1.5rem; border-bottom: 0.5px solid #F5F0E8; }
+tr:last-child td { border-bottom: none; }
+.status-pill { font-size: 0.68rem; padding: 0.25rem 0.6rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+.s-live { background: #ECFAF3; color: #1A7A44; }
+.s-soon { background: #FFF8E7; color: var(--gold-dark); }
+.s-sold { background: #FEECEC; color: #992B2B; }
+.side-widget { background: white; border: 0.5px solid var(--border); padding: 1.5rem; }
+.sw-title { font-size: 0.85rem; font-weight: 500; margin-bottom: 1.25rem; }
+.task-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 0.5px solid #F5F0E8; }
+.task-item:last-child { border-bottom: none; }
+.task-check { width: 16px; height: 16px; min-width: 16px; border: 1.5px solid var(--gold); flex-shrink: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+.task-check.done { background: var(--gold); color: white; }
+.task-text { font-size: 0.82rem; color: var(--warm-gray); line-height: 1.4; }
+.task-text.done { text-decoration: line-through; color: #BFB9B0; }
+
+/* AUTH */
+.auth-wrap { min-height: calc(100vh - 64px); display: grid; grid-template-columns: 1fr 1fr; }
+.auth-left { background: var(--ink); color: white; padding: 4rem; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+.auth-left::before { content: ''; position: absolute; top: -80px; right: -80px; width: 320px; height: 320px; border-radius: 50%; border: 60px solid rgba(201,168,76,0.1); }
+.auth-left::after { content: ''; position: absolute; bottom: -60px; left: -60px; width: 240px; height: 240px; border-radius: 50%; border: 40px solid rgba(201,168,76,0.07); }
+.auth-left-inner { position: relative; z-index: 1; }
+.al-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 3rem; }
+.al-logo span { color: var(--gold); }
+.auth-left h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; line-height: 1.2; margin-bottom: 1rem; color: white; }
+.auth-left p { color: rgba(255,255,255,0.5); line-height: 1.8; font-size: 0.92rem; font-weight: 300; margin-bottom: 2.5rem; }
+.auth-feat { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.9rem; }
+.auth-feat-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+.auth-feat span { font-size: 0.83rem; color: rgba(255,255,255,0.65); }
+.auth-right { padding: 4rem; display: flex; flex-direction: column; justify-content: center; background: var(--cream); }
+.auth-right-inner { max-width: 400px; width: 100%; margin: 0 auto; }
+.auth-right h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.4rem; }
+.auth-sub { color: var(--warm-gray); font-size: 0.88rem; margin-bottom: 2rem; }
+.auth-sub a { color: var(--gold); cursor: pointer; font-weight: 500; }
+.auth-divider { display: flex; align-items: center; gap: 1rem; margin: 1.4rem 0; }
+.auth-divider::before, .auth-divider::after { content: ''; flex: 1; height: 0.5px; background: var(--border); }
+.auth-divider span { font-size: 0.72rem; color: var(--warm-gray); text-transform: uppercase; letter-spacing: 0.08em; }
+.social-btn { width: 100%; padding: 0.72rem; border: 0.5px solid #D5CFC6; background: white; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.86rem; color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+.social-btn:hover { background: #F5F0E8; }
+.social-icon { width: 18px; height: 18px; flex-shrink: 0; }
+.auth-forgot { text-align: right; margin-top: -0.75rem; margin-bottom: 1.25rem; }
+.auth-forgot a { font-size: 0.76rem; color: var(--warm-gray); cursor: pointer; }
+.auth-forgot a:hover { color: var(--gold); }
+.auth-terms { font-size: 0.73rem; color: var(--warm-gray); text-align: center; margin-top: 1.25rem; line-height: 1.6; }
+.auth-terms a { color: var(--gold); cursor: pointer; }
+.input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.pw-wrap { position: relative; }
+.pw-wrap input { padding-right: 3rem; }
+.pw-toggle { position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 0.73rem; color: var(--warm-gray); background: none; border: none; font-family: 'DM Sans', sans-serif; }
+.auth-err { display: none; margin-top: 0.75rem; padding: 0.75rem 1rem; background: #FEECEC; border: 0.5px solid #F7C1C1; font-size: 0.82rem; color: #992B2B; }
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.25rem; }
+  .hero { grid-template-columns: 1fr; padding: 3rem 1.25rem; gap: 2rem; }
+  .hero h1 { font-size: 2.4rem; }
+  .stats-strip { grid-template-columns: repeat(2,1fr); }
+  .events-grid { grid-template-columns: 1fr; }
+  .dash-grid { grid-template-columns: repeat(2,1fr); }
+  .dash-content { grid-template-columns: 1fr; }
+  .page-header, .dash-wrap, .search-wrap { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .create-wrap { padding: 2rem 1.25rem; }
+  .auth-wrap { grid-template-columns: 1fr; }
+  .auth-left { display: none; }
+  .auth-right { padding: 2.5rem 1.5rem; min-height: calc(100vh - 64px); }
+  .profile-outer { padding: 1.5rem 1.25rem 3rem; }
+  .profile-banner { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+  .profile-cards { grid-template-columns: 1fr; }
+  .visit-section { flex-direction: column; text-align: center; }
+  .form-row, .input-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo" onclick="show('home')">Soir<span>ée</span></div>
+  <div class="nav-links">
+    <a onclick="show('home')">Home</a>
+    <a onclick="show('events')">Browse Events</a>
+    <a onclick="requireAuth('create')">Create Event</a>
+    <a onclick="requireAuth('dashboard')">Dashboard</a>
+    <a onclick="show('profile')" style="color:var(--gold);">My Profile</a>
+    <div id="nav-guest" style="display:flex;gap:0.75rem;align-items:center;">
+      <a onclick="show('login')" style="color:var(--ink);">Log in</a>
+      <button class="nav-cta" onclick="show('signup')">Sign up</button>
+    </div>
+    <div id="nav-user" class="nav-user" style="display:none;">
+      <div class="nav-avatar" id="nav-avatar">M</div>
+      <span style="font-size:0.82rem;font-weight:500;" id="nav-username"></span>
+      <button class="nav-logout" onclick="logout()">Log out</button>
+    </div>
+  </div>
+</nav>
+
+<!-- TICKET MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Book Tickets</h3>
+      <button class="modal-close" onclick="closeModal()">&#10005;</button>
+    </div>
+    <div class="modal-body" id="modal-body">
+      <div class="ticket-info">
+        <p>Event</p><strong id="m-event"></strong>
+        <p style="margin-top:0.75rem;">Date &amp; Venue</p><strong id="m-details"></strong>
+      </div>
+      <div class="qty-control">
+        <span class="qty-label">Tickets</span>
+        <button class="qty-btn" onclick="changeQty(-1)">&#8722;</button>
+        <span class="qty-num" id="qty-num">1</span>
+        <button class="qty-btn" onclick="changeQty(1)">&#43;</button>
+      </div>
+      <div class="total-row">
+        <span>Total amount</span>
+        <strong id="m-total">&#8377;0</strong>
+      </div>
+      <button class="book-btn" onclick="confirmBooking()">Confirm &amp; Book</button>
+    </div>
+    <div class="booking-success" id="booking-success">
+      <div class="check">&#10003;</div>
+      <h3>Booking Confirmed!</h3>
+      <p>Your tickets have been reserved. Check your email for a confirmation and QR code.</p>
+      <button class="book-btn" style="margin-top:1.5rem;" onclick="closeModal()">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PROFILE — opens first ═══════════ -->
+<section id="profile" class="active">
+  <div class="profile-outer">
+
+    <div class="profile-banner">
+      <div class="profile-av">M</div>
+      <div class="profile-banner-info">
+        <h1>Mehak Gupta</h1>
+        <div class="profile-tag">Event Enthusiast &amp; Developer</div>
+        <div class="profile-reg-badge">Reg. No: 24BDS0210</div>
+      </div>
+    </div>
+
+    <div class="profile-cards">
+      <div class="pcard">
+        <div class="pcard-label">Full Name</div>
+        <div class="pcard-value">Mehak Gupta</div>
+        <div class="pcard-sub">Member since 2024</div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-label">Registration Number</div>
+        <div class="pcard-value">24BDS0210</div>
+        <div class="pcard-sub">Student ID</div>
+      </div>
+      <div class="pcard full">
+        <div class="pcard-label">Education</div>
+        <div class="pcard-value">B.Tech in Computer Science (Data Science)</div>
+        <div class="pcard-sub">Currently pursuing undergraduate degree &mdash; batch of 2024</div>
+      </div>
+      <div class="pcard full">
+        <div class="pcard-label">Hobbies &amp; Interests</div>
+        <div class="hobby-row">
+          <span class="hobby-pill">&#127908; Singing</span>
+          <span class="hobby-pill">&#128131; Dancing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-stats">
+      <div class="pstat"><div class="pstat-num">3</div><div class="pstat-lbl">Events Attended</div></div>
+      <div class="pstat"><div class="pstat-num">1</div><div class="pstat-lbl">Events Hosted</div></div>
+      <div class="pstat"><div class="pstat-num">5</div><div class="pstat-lbl">Saved Events</div></div>
+    </div>
+
+    <div class="visit-section">
+      <div>
+        <h3>Visit My Events Website</h3>
+        <p>Explore the Soiree events management platform — browse upcoming events, create listings, book tickets, and manage your organiser dashboard.</p>
+      </div>
+      <button class="visit-btn" onclick="show('home')">&#8594;&nbsp; Visit Website</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ LOGIN ═══════════ -->
+<section id="login">
+  <div class="auth-wrap">
+    <div class="auth-left">
+      <div class="auth-left-inner">
+        <div class="al-logo">Soir<span>ée</span></div>
+        <h2>Welcome back to the world of refined events.</h2>
+        <p>Log in to manage your events, track bookings, and discover curated experiences across the city.</p>
+        <div class="auth-feat"><div class="auth-feat-dot"></div><span>Manage all your events in one place</span></div>
+        <div class="auth-feat"><div class="auth-feat-dot"></div><span>Track ticket sales in real time</span></div>
+        <div class="auth-feat"><div class="auth-feat-dot"></div><span>Discover exclusive curated experiences</span></div>
+      </div>
+    </div>
+    <div class="auth-right">
+      <div class="auth-right-inner">
+        <h3>Log in</h3>
+        <p class="auth-sub">Don't have an account? <a onclick="show('signup')">Sign up for free</a></p>
+        <button class="social-btn">
+          <svg class="social-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          Continue with Google
+        </button>
+        <div class="auth-divider"><span>or</span></div>
+        <div class="form-group"><label>Email address</label><input type="email" id="login-email" placeholder="you@example.com"></div>
+        <div class="form-group">
+          <label>Password</label>
+          <div class="pw-wrap">
+            <input type="password" id="login-pw" placeholder="Enter your password">
+            <button class="pw-toggle" onclick="togglePw('login-pw',this)">Show</button>
+          </div>
+        </div>
+        <div class="auth-forgot"><a>Forgot password?</a></div>
+        <button class="form-submit" onclick="doLogin()">Log in</button>
+        <div class="auth-err" id="login-error"></div>
+        <p class="auth-terms">By continuing you agree to our <a>Terms of Service</a> and <a>Privacy Policy</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SIGN UP ═══════════ -->
+<section id="signup">
+  <div class="auth-wrap">
+    <div class="auth-left">
+      <div class="auth-left-inner">
+        <div class="al-logo">Soir<span>ée</span></div>
+        <h2>Join thousands of event creators and attendees.</h2>
+        <p>Create your free account to start hosting unforgettable events or discover experiences worth attending.</p>
+        <div class="auth-feat"><div class="auth-feat-dot"></div><span>Publish events in minutes</span></div>
+        <div class="auth-feat"><div class="auth-feat-dot"></div><span>Sell tickets with zero setup fees</span></div>
+        <div class="auth-feat"><div class="auth-feat-dot"></div><span>Get powerful analytics and insights</span></div>
+        <div class="auth-feat"><div class="auth-feat-dot"></div><span>Access exclusive member-only events</span></div>
+      </div>
+    </div>
+    <div class="auth-right">
+      <div class="auth-right-inner">
+        <h3>Create account</h3>
+        <p class="auth-sub">Already have an account? <a onclick="show('login')">Log in</a></p>
+        <button class="social-btn">
+          <svg class="social-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          Sign up with Google
+        </button>
+        <div class="auth-divider"><span>or</span></div>
+        <div class="input-row">
+          <div class="form-group"><label>First name</label><input type="text" id="signup-fname" placeholder="Mehak"></div>
+          <div class="form-group"><label>Last name</label><input type="text" id="signup-lname" placeholder="Gupta"></div>
+        </div>
+        <div class="form-group"><label>Email address</label><input type="email" id="signup-email" placeholder="you@example.com"></div>
+        <div class="form-group">
+          <label>Password</label>
+          <div class="pw-wrap">
+            <input type="password" id="signup-pw" placeholder="At least 8 characters">
+            <button class="pw-toggle" onclick="togglePw('signup-pw',this)">Show</button>
+          </div>
+        </div>
+        <div class="form-group"><label>I am a</label><select><option>Event Attendee</option><option>Event Host / Organiser</option><option>Both</option></select></div>
+        <button class="form-submit" onclick="doSignup()">Create account</button>
+        <div class="auth-err" id="signup-error"></div>
+        <p class="auth-terms">By signing up you agree to our <a>Terms of Service</a> and <a>Privacy Policy</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ HOME ═══════════ -->
+<section id="home">
+  <div class="hero">
+    <div>
+      <div class="hero-tag">Curated Experiences</div>
+      <h1>Moments worth remembering.</h1>
+      <p>Soirée is the premier platform for discovering, creating, and managing refined events — from intimate gatherings to grand galas.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="show('events')">Explore Events</button>
+        <button class="btn-outline" onclick="show('create')">Host an Event</button>
+      </div>
+    </div>
+    <div>
+      <div class="hero-card">
+        <div class="event-badge">Featured</div>
+        <h3>Annual Arts Gala 2026</h3>
+        <p style="font-size:0.83rem;color:var(--warm-gray);line-height:1.6;">An evening of contemporary art, live performance, and curated cuisine at the heart of the city.</p>
+        <div class="event-meta">
+          <div class="meta-item"><strong>Apr 18, 2026</strong>Sat, 7:00 PM</div>
+          <div class="meta-item"><strong>The Grand Hall</strong>Chennai</div>
+          <div class="meta-item"><strong>&#8377;4,500</strong>Per person</div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill"></div></div>
+        <div class="prog-label"><span>72% seats filled</span><span>112 remaining</span></div>
+        <button class="btn-primary" style="margin-top:1.5rem;width:100%;" onclick="openModal('Annual Arts Gala 2026','Sat, April 18 · The Grand Hall, Chennai',4500)">Book Tickets</button>
+      </div>
+    </div>
+  </div>
+  <div class="stats-strip">
+    <div class="stat-box"><div class="stat-num">2,400+</div><div class="stat-label">Events Hosted</div></div>
+    <div class="stat-box"><div class="stat-num">180K</div><div class="stat-label">Guests Served</div></div>
+    <div class="stat-box"><div class="stat-num">340</div><div class="stat-label">Verified Venues</div></div>
+    <div class="stat-box"><div class="stat-num">98%</div><div class="stat-label">Satisfaction Rate</div></div>
+  </div>
+</section>
+
+<!-- ═══════════ EVENTS ═══════════ -->
+<section id="events">
+  <div class="page-header">
+    <h2>Upcoming Events</h2>
+    <p>Curated experiences across Chennai and beyond</p>
+    <div class="filters">
+      <button class="filter-btn active" onclick="setFilter(this,'all')">All</button>
+      <button class="filter-btn" onclick="setFilter(this,'gala')">Galas</button>
+      <button class="filter-btn" onclick="setFilter(this,'workshop')">Workshops</button>
+      <button class="filter-btn" onclick="setFilter(this,'concert')">Concerts</button>
+      <button class="filter-btn" onclick="setFilter(this,'networking')">Networking</button>
+    </div>
+  </div>
+  <div class="search-wrap">
+    <div class="search-box">
+      <input type="text" id="search-input" placeholder="Search events by name, venue, or category..." oninput="applyFilters()">
+      <button onclick="applyFilters()">Search</button>
+    </div>
+  </div>
+  <div class="events-grid" id="events-grid">
+    <div class="event-card" data-cat="gala" data-name="annual arts gala grand hall chennai">
+      <div class="ec-cat">Gala</div><div class="ec-title">Annual Arts Gala 2026</div>
+      <div class="ec-date">Sat, April 18 · 7:00 PM</div><div class="ec-venue">The Grand Hall, Chennai</div>
+      <div class="ec-footer"><span class="ec-price">&#8377;4,500</span><span class="ec-spots">112 spots left</span></div>
+      <button class="btn-primary" style="margin-top:1rem;width:100%;font-size:0.78rem;padding:0.6rem;" onclick="openModal('Annual Arts Gala 2026','Sat, April 18 · The Grand Hall, Chennai',4500)">Book Now</button>
+    </div>
+    <div class="event-card" data-cat="workshop" data-name="masterclass modern indian cuisine studio kitchen t nagar">
+      <div class="ec-cat">Workshop</div><div class="ec-title">Masterclass: Modern Indian Cuisine</div>
+      <div class="ec-date">Sat, May 3 · 11:00 AM</div><div class="ec-venue">Studio Kitchen, T. Nagar</div>
+      <div class="ec-footer"><span class="ec-price">&#8377;2,200</span><span class="ec-spots">8 spots left</span></div>
+      <button class="btn-primary" style="margin-top:1rem;width:100%;font-size:0.78rem;padding:0.6rem;" onclick="openModal('Masterclass: Modern Indian Cuisine','Sat, May 3 · Studio Kitchen, T. Nagar',2200)">Book Now</button>
+    </div>
+    <div class="event-card" data-cat="concert" data-name="carnatic fusion evening music academy alwarpet">
+      <div class="ec-cat">Concert</div><div class="ec-title">Carnatic Fusion Evening</div>
+      <div class="ec-date">Fri, May 9 · 6:30 PM</div><div class="ec-venue">Music Academy, Alwarpet</div>
+      <div class="ec-footer"><span class="ec-price">&#8377;1,800</span><span class="ec-spots">34 spots left</span></div>
+      <button class="btn-primary" style="margin-top:1rem;width:100%;font-size:0.78rem;padding:0.6rem;" onclick="openModal('Carnatic Fusion Evening','Fri, May 9 · Music Academy, Alwarpet',1800)">Book Now</button>
+    </div>
+    <div class="event-card" data-cat="networking" data-name="founders creatives mixer rooftop omr">
+      <div class="ec-cat">Networking</div><div class="ec-title">Founders &amp; Creatives Mixer</div>
+      <div class="ec-date">Thu, May 15 · 6:00 PM</div><div class="ec-venue">Rooftop, OMR</div>
+      <div class="ec-footer"><span class="ec-price">&#8377;800</span><span class="ec-spots">20 spots left</span></div>
+      <button class="btn-primary" style="margin-top:1rem;width:100%;font-size:0.78rem;padding:0.6rem;" onclick="openModal('Founders & Creatives Mixer','Thu, May 15 · Rooftop, OMR',800)">Book Now</button>
+    </div>
+    <div class="event-card" data-cat="gala" data-name="monsoon charity dinner leela palace chennai">
+      <div class="ec-cat">Gala</div><div class="ec-title">Monsoon Charity Dinner</div>
+      <div class="ec-date">Sat, Jun 7 · 7:30 PM</div><div class="ec-venue">Leela Palace, Chennai</div>
+      <div class="ec-footer"><span class="ec-price">&#8377;6,000</span><span class="sold-out">Sold out</span></div>
+    </div>
+    <div class="event-card" data-cat="workshop" data-name="pottery mindfulness retreat clay studio besant nagar">
+      <div class="ec-cat">Workshop</div><div class="ec-title">Pottery &amp; Mindfulness Retreat</div>
+      <div class="ec-date">Sun, Jun 22 · 9:00 AM</div><div class="ec-venue">The Clay Studio, Besant Nagar</div>
+      <div class="ec-footer"><span class="ec-price">&#8377;3,100</span><span class="ec-spots">15 spots left</span></div>
+      <button class="btn-primary" style="margin-top:1rem;width:100%;font-size:0.78rem;padding:0.6rem;" onclick="openModal('Pottery & Mindfulness Retreat','Sun, Jun 22 · The Clay Studio, Besant Nagar',3100)">Book Now</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CREATE EVENT ═══════════ -->
+<section id="create">
+  <div class="create-wrap">
+    <h2>Create an event</h2>
+    <p>Fill in the details below to list your event on Soirée.</p>
+    <div class="form-group"><label>Event Title</label><input type="text" placeholder="e.g. Summer Jazz Evening"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Category</label><select><option>Gala</option><option>Workshop</option><option>Concert</option><option>Networking</option><option>Festival</option><option>Other</option></select></div>
+      <div class="form-group"><label>Ticket Price (&#8377;)</label><input type="number" placeholder="0 for free"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Date</label><input type="date"></div>
+      <div class="form-group"><label>Time</label><input type="time"></div>
+    </div>
+    <div class="form-group"><label>Venue</label><input type="text" placeholder="Full venue name and address"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Total Capacity</label><input type="number" placeholder="e.g. 150"></div>
+      <div class="form-group"><label>Organiser Name</label><input type="text" placeholder="Your name or company"></div>
+    </div>
+    <div class="form-group"><label>Description</label><textarea placeholder="Tell guests what to expect..."></textarea></div>
+    <button class="form-submit" onclick="submitForm()">Publish Event</button>
+    <div class="success-msg" id="success-msg">
+      <h3>Event published!</h3>
+      <p>Your event is now live on Soirée. Guests can begin registering.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ DASHBOARD ═══════════ -->
+<section id="dashboard">
+  <div class="dash-wrap">
+    <div class="dash-header">
+      <div><h2>Dashboard</h2><p>Overview of your events — March 2026</p></div>
+      <button class="btn-primary" onclick="show('create')">+ New Event</button>
+    </div>
+    <div class="dash-grid">
+      <div class="dash-stat"><div class="ds-label">Total Revenue</div><div class="ds-val">&#8377;3.8L</div><div class="ds-change">&#8593; 18% this month</div></div>
+      <div class="dash-stat"><div class="ds-label">Tickets Sold</div><div class="ds-val">892</div><div class="ds-change">&#8593; 24% this month</div></div>
+      <div class="dash-stat"><div class="ds-label">Active Events</div><div class="ds-val">6</div><div class="ds-change">2 upcoming soon</div></div>
+      <div class="dash-stat"><div class="ds-label">Avg. Rating</div><div class="ds-val">4.8</div><div class="ds-change">from 214 reviews</div></div>
+    </div>
+    <div class="dash-content">
+      <div class="dash-table-wrap">
+        <div class="dt-header"><h3>Your Events</h3><span style="font-size:0.78rem;color:var(--warm-gray);">Showing 5 of 6</span></div>
+        <table>
+          <thead><tr><th>Event</th><th>Date</th><th>Tickets</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Annual Arts Gala</td><td style="color:var(--warm-gray);font-size:0.8rem;">Apr 18</td><td>288/400</td><td><span class="status-pill s-live">Live</span></td></tr>
+            <tr><td>Cuisine Masterclass</td><td style="color:var(--warm-gray);font-size:0.8rem;">May 3</td><td>22/30</td><td><span class="status-pill s-live">Live</span></td></tr>
+            <tr><td>Carnatic Fusion</td><td style="color:var(--warm-gray);font-size:0.8rem;">May 9</td><td>166/200</td><td><span class="status-pill s-live">Live</span></td></tr>
+            <tr><td>Founders Mixer</td><td style="color:var(--warm-gray);font-size:0.8rem;">May 15</td><td>80/100</td><td><span class="status-pill s-soon">Upcoming</span></td></tr>
+            <tr><td>Monsoon Dinner</td><td style="color:var(--warm-gray);font-size:0.8rem;">Jun 7</td><td>200/200</td><td><span class="status-pill s-sold">Sold Out</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="side-widget">
+        <div class="sw-title">Event checklist</div>
+        <div class="task-item"><div class="task-check done" onclick="toggleTask(this)">&#10003;</div><div class="task-text done">Create event listing</div></div>
+        <div class="task-item"><div class="task-check done" onclick="toggleTask(this)">&#10003;</div><div class="task-text done">Set up ticketing</div></div>
+        <div class="task-item"><div class="task-check" onclick="toggleTask(this)"></div><div class="task-text">Confirm venue booking</div></div>
+        <div class="task-item"><div class="task-check" onclick="toggleTask(this)"></div><div class="task-text">Send invitations</div></div>
+        <div class="task-item"><div class="task-check" onclick="toggleTask(this)"></div><div class="task-text">Arrange catering</div></div>
+        <div class="task-item"><div class="task-check" onclick="toggleTask(this)"></div><div class="task-text">Confirm AV equipment</div></div>
+        <div class="task-item"><div class="task-check" onclick="toggleTask(this)"></div><div class="task-text">Brief event staff</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+var currentPrice=0,qty=1,activeFilter='all',currentUser=null;
+function show(id){document.querySelectorAll('section').forEach(function(s){s.classList.remove('active')});document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+function requireAuth(page){currentUser?show(page):show('login');}
+function doLogin(){
+  var email=document.getElementById('login-email').value.trim();
+  var pw=document.getElementById('login-pw').value;
+  var err=document.getElementById('login-error');
+  if(!email||!pw){err.textContent='Please enter your email and password.';err.style.display='block';return;}
+  if(pw.length<4){err.textContent='Incorrect email or password. Please try again.';err.style.display='block';return;}
+  err.style.display='none';
+  var name=email.split('@')[0];name=name.charAt(0).toUpperCase()+name.slice(1);
+  loginUser(name,email);show('home');
+}
+function doSignup(){
+  var fname=document.getElementById('signup-fname').value.trim();
+  var lname=document.getElementById('signup-lname').value.trim();
+  var email=document.getElementById('signup-email').value.trim();
+  var pw=document.getElementById('signup-pw').value;
+  var err=document.getElementById('signup-error');
+  if(!fname||!lname){err.textContent='Please enter your first and last name.';err.style.display='block';return;}
+  if(!email||email.indexOf('@')===-1){err.textContent='Please enter a valid email address.';err.style.display='block';return;}
+  if(pw.length<8){err.textContent='Password must be at least 8 characters.';err.style.display='block';return;}
+  err.style.display='none';loginUser(fname+' '+lname,email);show('home');
+}
+function loginUser(name,email){
+  currentUser={name:name,email:email};
+  document.getElementById('nav-guest').style.display='none';
+  document.getElementById('nav-user').style.display='flex';
+  document.getElementById('nav-username').textContent=name.split(' ')[0];
+  document.getElementById('nav-avatar').textContent=name.charAt(0).toUpperCase();
+}
+function logout(){
+  currentUser=null;
+  document.getElementById('nav-guest').style.display='flex';
+  document.getElementById('nav-user').style.display='none';
+  show('home');
+}
+function togglePw(id,btn){
+  var inp=document.getElementById(id);
+  inp.type=inp.type==='password'?'text':'password';
+  btn.textContent=inp.type==='password'?'Show':'Hide';
+}
+function setFilter(btn,cat){
+  activeFilter=cat;
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');applyFilters();
+}
+function applyFilters(){
+  var query=(document.getElementById('search-input').value||'').toLowerCase();
+  var cards=document.querySelectorAll('.event-card');var visible=0;
+  cards.forEach(function(card){
+    var cm=activeFilter==='all'||card.dataset.cat===activeFilter;
+    var sm=!query||(card.dataset.name||'').indexOf(query)!==-1;
+    card.style.display=cm&&sm?'block':'none';
+    if(cm&&sm)visible++;
+  });
+  var nr=document.getElementById('no-results');
+  if(visible===0){if(!nr){var d=document.createElement('div');d.className='no-results';d.id='no-results';d.textContent='No events found. Try a different search or filter.';document.getElementById('events-grid').appendChild(d);}}
+  else{if(nr)nr.remove();}
+}
+function openModal(name,details,price){
+  currentPrice=price;qty=1;
+  document.getElementById('m-event').textContent=name;
+  document.getElementById('m-details').textContent=details;
+  document.getElementById('qty-num').textContent='1';
+  document.getElementById('m-total').textContent='&#8377;'+price.toLocaleString('en-IN');
+  document.getElementById('modal-body').style.display='block';
+  document.getElementById('booking-success').style.display='none';
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+function changeQty(delta){
+  qty=Math.max(1,Math.min(10,qty+delta));
+  document.getElementById('qty-num').textContent=qty;
+  document.getElementById('m-total').textContent='&#8377;'+(currentPrice*qty).toLocaleString('en-IN');
+}
+function confirmBooking(){
+  document.getElementById('modal-body').style.display='none';
+  document.getElementById('booking-success').style.display='block';
+}
+function submitForm(){
+  var msg=document.getElementById('success-msg');msg.style.display='block';
+  setTimeout(function(){msg.style.display='none';},5000);
+}
+function toggleTask(el){
+  var text=el.nextElementSibling;
+  if(el.classList.contains('done')){el.classList.remove('done');el.textContent='';text.classList.remove('done');}
+  else{el.classList.add('done');el.textContent='&#10003;';text.classList.add('done');}
+}
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+</script>
+</body>
+</html>
